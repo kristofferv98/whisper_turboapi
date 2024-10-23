@@ -1,0 +1,20 @@
+# Server
+fastapi>=0.115.0
+uvicorn>=0.32.0
+python-multipart>=0.0.5
+aiohttp
+requests
+
+# Core ML & Audio
+mlx==0.18.1
+numpy==2.0.2
+librosa==0.10.2.post1
+
+# Model utilities
+tiktoken==0.8.0
+huggingface-hub==0.24.7
+fire==0.6.0
+
+# Setup
+setuptools
+
