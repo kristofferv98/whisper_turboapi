@@ -9,7 +9,7 @@ An optimized FastAPI server implementation of OpenAI's Whisper large-v3-turbo mo
 - ⚡ **Async/Sync Support:** Seamlessly handle both asynchronous and synchronous transcription requests.
 - 🔄 **Low Latency:** Optimized for minimal delay by preloading models and efficient processing.
 - 🔧 **High Throughput:** Capable of handling multiple concurrent transcription requests.
-- 🚀 **Easy Deployment:** Simple setup process with minimal dependencies.
+- 🚀 **Easy Setup:** Simple setup process.
 
 ## System Requirements
 
@@ -191,13 +191,31 @@ if __name__ == "__main__":
 
 ### CURL
 
-You can also use `curl` to test the API:
+You can use `curl` to test the API. Here's a working example:
 
 ```bash
-curl -X POST http://localhost:8000/transcribe \
-  -F "file=@path/to/audio.wav" \
-  -F "quick=true" \
-  -F "any_lang=false"
+curl -X POST \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@path/to/your/audio.wav" \
+  http://localhost:8000/transcribe
+```
+
+For example with a sample audio file:
+```bash
+curl -X POST \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@sample_audio.wav" \
+  http://localhost:8000/transcribe
+```
+
+The response will be JSON formatted:
+```json
+{
+    "text": "Transcribed text here...",
+    "elapsed_time": 1.44,
+    "quick_mode": true,
+    "any_lang": true
+}
 ```
 
 ## API Reference
@@ -206,22 +224,34 @@ curl -X POST http://localhost:8000/transcribe \
 
 Transcribe an audio file.
 
-**Parameters**:
+**Headers**:
+- `Content-Type: multipart/form-data` (required)
 
-- `file` (form data): Audio file (WAV, MP3, M4A, FLAC)
-- `quick` (query parameter): Boolean, faster processing if true (default: true)
-- `any_lang` (query parameter): Boolean, auto-detect language if true, English-only if false (default: true)
+**Parameters**:
+- `file` (form data, required): Audio file (WAV, MP3, M4A, FLAC)
+
+**Example Request**:
+```bash
+curl -X POST \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@audio.wav" \
+  http://localhost:8000/transcribe
+```
 
 **Response**:
-
 ```json
 {
-    "text": "Transcribed text here",
-    "elapsed_time": 5.67,
+    "text": "The transcribed text will appear here...",
+    "elapsed_time": 1.44,
     "quick_mode": true,
     "any_lang": true
 }
 ```
+
+**Status Codes**:
+- `200 OK`: Successful transcription
+- `400 Bad Request`: Invalid file format or missing file
+- `500 Internal Server Error`: Server processing error
 
 ### GET /health
 
