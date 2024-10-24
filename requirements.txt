@@ -17,4 +17,4 @@ fire==0.6.0
 
 # Setup
 setuptools
-python-multipart
+python-multipart==0.0.7
