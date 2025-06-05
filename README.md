@@ -1,5 +1,7 @@
 # WhisperTurboAPI
 
+🚨 This repository is no longer maintained: Visis [Realtime_MLx](https://github.com/kristofferv98/Realtime_mlx_STT) for the latest most up to date server with improved capabilities.
+
 An optimized FastAPI server implementation of OpenAI's Whisper large-v3-turbo model using MLX optimization, designed for low-latency, asynchronous and synchronous audio transcription on macOS.
 
 ## Features
